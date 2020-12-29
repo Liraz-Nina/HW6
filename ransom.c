@@ -12,7 +12,7 @@ char* readline();
 char** split_string(char*);
 typedef struct list_node list_node;
 struct list_node{
-    char val;
+    char *val;
     list_node *next;
 };
 
@@ -27,7 +27,7 @@ list_node *create_list (int size, char** array){
     list_node *tmp = NULL;
     for (int i=0; i<size; i++){
         list_node *node = malloc(sizeof(list_node));
-        node->val = *array[i];
+        node->val = array[i];
         node->next = tmp;
         tmp = node;
     }
@@ -44,6 +44,7 @@ void free_list (list_node *node){
         free (tmp);
     }
 }
+
 /**
  * @brief this function checks if you can make the note from the magazine.
  * @param magazine an array of char pointers.
@@ -57,19 +58,19 @@ void checkMagazine(int magazine_count, char** magazine, int note_count, char** n
     list_node *magazine_list_tmp = magazine_list;
     list_node *note_list_tmp = note_list;
     while (note_list){
-        char word = note_list->val;
+        char *word = note_list->val;
         int match = 0;
         while (magazine_list){
-            if (magazine_list->val == word){
+            if (strcmp(magazine_list->val, word)==0){
                 match = 1;
-                magazine_list->val = 0;
-                break; /*we found the word and don't need to keep searching.*/
+                magazine_list->val = "\0";
+                break;
             }
             else {
                 magazine_list = magazine_list->next;
             }
         }
-        if (match == 0){ /*no matches for the word.*/
+        if (match == 0){
             printf ("No");
             free_list (magazine_list_tmp);
             free_list (note_list_tmp);
