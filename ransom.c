@@ -63,13 +63,13 @@ void checkMagazine(int magazine_count, char** magazine, int note_count, char** n
             if (magazine_list->val == word){
                 match = 1;
                 magazine_list->val = 0;
-                break; //we found the word and don't need to keep searching.
+                break; /*we found the word and don't need to keep searching.*/
             }
             else {
                 magazine_list = magazine_list->next;
             }
         }
-        if (match == 0){ //no matches for the word.
+        if (match == 0){ /*no matches for the word.*/
             printf ("No");
             free_list (magazine_list_tmp);
             free_list (note_list_tmp);
