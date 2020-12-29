@@ -27,6 +27,9 @@ list_node *create_list (int size, char** array){
     list_node *tmp = NULL;
     for (int i=0; i<size; i++){
         list_node *node = malloc(sizeof(list_node));
+        if (node == NULL){
+            return NULL;
+            }
         node->val = array[i];
         node->next = tmp;
         tmp = node;
@@ -55,6 +58,9 @@ void free_list (list_node *node){
 void checkMagazine(int magazine_count, char** magazine, int note_count, char** note) {
     list_node *magazine_list = create_list (magazine_count, magazine);
     list_node *note_list = create_list (note_count, note);
+    if (magazine_list == NULL || note_list == NULL){
+        return;
+        } 
     list_node *magazine_list_tmp = magazine_list;
     list_node *note_list_tmp = note_list;
     while (note_list){
