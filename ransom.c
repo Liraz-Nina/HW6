@@ -58,7 +58,9 @@ void free_list (list_node *node){
 void checkMagazine(int magazine_count, char** magazine, int note_count, char** note) {
     list_node *magazine_list = create_list (magazine_count, magazine);
     list_node *note_list = create_list (note_count, note);
-    if (magazine_list == NULL || note_list == NULL){
+    if (magazine_list == NULL || note_list == NULL){/*malloc failed*/
+        free_list (magazine_list);
+        free_list (note_list);
         return;
         } 
     list_node *magazine_list_tmp = magazine_list;
